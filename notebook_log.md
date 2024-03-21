@@ -73,4 +73,39 @@ Last- Plot tree
 example- 
 plot(tre.pars, cex=0.6)
 
+Choose a maximum likelihood method that you like the best on your project 
+dataset (it does not have to be RAxML or IQ-Tree, but you should read the 
+paper and tutorial of whichever method you choose)
 
+
+March 21, 2024
+
+Although there are other software packages RAxML (Randomized Axelerated 
+Maximum Likelihood) and IQ-TREE are both widely used software packages for phylogenetic analysis, especially useful 
+in constructing phylogenetic trees based on genetic sequence data. When it 
+comes to analyzing SNP (Single Nucleotide Polymorphism) variants of a 
+particular organism, such as Sclerotinia sclerotiorum, the choice between 
+RAxML and IQ-TREE depends on several factors including computational 
+efficiency, model selection, user interface, and the specific goals of 
+your phylogenetic analysis. RAxML has high computational efficacy, good 
+performace abd better flexibility while it lacks in bulit model selection. 
+while IQ-tree offers the above including built-in model selection tool, 
+which can automatically determine the best-fitting model of evolution for 
+your data. This is particularly useful for SNP data of Sclerotinia 
+sclerotiorum as selecting an appropriate model can significantly impact 
+the accuracy of the phylogenetic tree.
+or analyzing SNP variants of Sclerotinia sclerotiorum would likely lean 
+towards IQ-TREE due to its integrated model selection capability, which is 
+crucial for SNP data analysis to ensure the accuracy of the phylogenetic 
+tree. The automatic model selection simplifies the workflow and can lead 
+to better-supported phylogenetic conclusions. Additionally, IQ-TREE's 
+user-friendly approach and flexibility in handling various models make it 
+an attractive option for researchers working on SNP data.
+
+After SNP aclling and alignment of data. we choose IQ-Tree and then next 
+step is to run it with command iqtree -s mydata.phy -m TEST. where Replace 
+mydata.phy with the path to your data file. This command tells IQ-TREE 
+to select the best-fit model automatically and then use that model to 
+construct the phylogenetic tree.To assess the reliability of the branches 
+in my phylogenetic tree, I might perform bootstrapping. Next step would be 
+to interpret the result. 
