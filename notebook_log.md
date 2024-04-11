@@ -109,3 +109,39 @@ to select the best-fit model automatically and then use that model to
 construct the phylogenetic tree.To assess the reliability of the branches 
 in my phylogenetic tree, I might perform bootstrapping. Next step would be 
 to interpret the result. 
+
+April 11, 2024-  Performing Bayesian method in my data
+
+*Downloaded  MrBayes from here-
+brew reinstall mrbayes
+sudo chown -R $(whoami) /usr/local/Cellar/open-mpi/4.1.0
+brew reinstall mrbayes
+
+* Once I have the alignment file (FASTA) for my data, I will have to convert it before running Mr. Bayes, since it only reads nexus files. 
+
+* With the nexus file saved on my laptop, I will next create a mrbayes block in a separate txt file. In this file I will put the following items and save it: 
+
+"begin mrbayes;
+ set autoclose=yes;
+ prset brlenspr=unconstrained:exp(10.0);
+ prset shapepr=exp(1.0);
+ prset tratiopr=beta(1.0,1.0);
+ prset statefreqpr=dirichlet(1.0,1.0,1.0,1.0);
+ lset nst=* rates=gamma ngammacat=4;
+ mcmcp ngen=1,000,000 samplefreq=10 printfreq=100 nruns=1 nchains=3 savebrlens=yes;
+ outgroup Anacystis_nidulans;
+ mcmc;
+ sumt;
+end;" 
+
+**** This is a file to insert the prior information to create the desired trees. For my data notice that I put the substitution model with a star  (not = *) because I will decide what model to use based on the one outputted by IQ Tree, once I know what model I will use I will do the proper * substitution to inform what model I will proceed using. Note that I also changed the generation number to 1,000,000 (ngen=1,000,000). For the rest of the lines, you noticed that in this case, I did not change the standard parameters because I don't have previous knowledge about my data to change the priors, so I will go ahead using the same. ****
+
+
+* Next I have to "merge" my block file with my nex data file using the code shown below as an example: 
+"cat algaemb.nex mbblock.txt > algaemb-mb.nex"
+
+* Once merged, I can go ahead and run the command mb to run mrBayes on my "-mb.nex" file, like in the example below:
+
+"mb algaemb-mb.nex"
+
+* I can save the output in different formats, but for my purposes, I will choose to save the output of this proposed tree as .tre, so that I can proceed to alter its layout using software like R, for example, with R packages that allow me to manipulate phylogenetic trees.
