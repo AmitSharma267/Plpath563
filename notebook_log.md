@@ -145,3 +145,36 @@ end;"
 "mb algaemb-mb.nex"
 
 * I can save the output in different formats, but for my purposes, I will choose to save the output of this proposed tree as .tre, so that I can proceed to alter its layout using software like R, for example, with R packages that allow me to manipulate phylogenetic trees.
+
+April23,2024
+
+In my work for the class project I am not going to do work based on coalescent methods, but it is good to learn about the software, procedure and codes for it
+There are many computational tools and approaches available, depending on the specifics of your project and the nature of your data. 
+For a project that requires modeling species and gene trees under a coalescent process, one widely used tool is BEAST (Bayesian Evolutionary Analsis Sampling Trees)
+we learned about this in class.
+
+BEAST is know for its excellent for analyzing complex evolutionary scenarios that involve sequence data from multiple genes.
+ It has many advantages like in the estimation of phylogenies with explicit models of evolution, incorporating various molecular 
+ clocks and coalescent processes, infering past-population dynamics and to deal with different types of sequence data and multiple
+loci in a statistically robust Bayesian framework.
+
+here’s a generic walkthrough of the steps involved-
+Download and install BEAST 
+ Format the sequence data in an XML file, which includes sequences, models of evolution, and settings for the MCMC analysis. This can be done using BEAUti (Bayesian Evolutionary Analysis Utility), which is part of the BEAST software suite.
+ Configure the Coalescent Model: Within BEAUti:
+fisrly Load the data, Set the substitution model, molecular clock model, and tree priors under the assumption of a coalescent process.
+Choose from different coalescent models like constant size, exponential growth, or skyline plots based on your hypothesis about population dynamics
+Once your model is specified, generate the XML input file for BEAST.
+Next step is to run the beast and the cide is as-
+beast -beagle -beagle_SSE -threads auto ConfigFile.xml
+After BEAST finishes running, analyze the output using programs like Tracer (to examine MCMC trace files) and TreeAnnotator (to summarize the posterior sample of trees).
+
+like for the lab we were to perfom this 
+1. Prepared data in BEAUti and set up a coalescent model of constant population size.
+2. Exported analysis settings to XML file named 'coalescent_toy_example.xml'.
+3. Ran BEAST with the following command:
+   beast -beagle -beagle_SSE -threads auto coalescent_toy_example.xml
+4. Monitored run progress and convergence in Tracer.
+5. Summarized posterior trees using TreeAnnotator with a burn-in of 10%.
+
+I also read from online sourecs to write this information.
